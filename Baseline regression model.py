@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib as plt
 
 from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.metrics import mean_squared_error
+from sklearn.metrics import mean_squared_error, root_mean_squared_error
 from sklearn.linear_model import Ridge
 from sklearn.preprocessing import StandardScaler
 
@@ -53,7 +53,7 @@ X_test = pd.DataFrame(X_test_scaled, columns=X_test.columns, index=X_test.index)
 
 #scikit learn has a method: RidgeCV, which automatically performs ridge with cross validation
 #usualy alpha values are chosen on a logarithmic scale because regularization controls penalty strength exponentially
-alphas = [1, 5, 10, 20, 50, 100, 1000]
+alphas = [0.01, 0.1, 1, 10, 100, 1000]
 #use this method to tune any hyper parameter
 def ridge_hyperparameter(array):
     best_score = -float('inf')
@@ -86,10 +86,12 @@ ridge_model.fit(X_train, y_train)
 #optimisation
 
 y_pred_train = ridge_model.predict(X_train)
-training_error = mean_squared_error(y_train, y_pred_train)
+mse_training = mean_squared_error(y_train, y_pred_train)
+rmse_training = root_mean_squared_error(y_train, y_pred_train)
 
 y_pred_test = ridge_model.predict(X_test)
-test_error = mean_squared_error(y_test, y_pred_test)
+mse_test = mean_squared_error(y_test, y_pred_test)
+rmse_test = root_mean_squared_error(y_test, y_pred_test)
 
-print(f"ridge_training error: {training_error}")
-print(f"ridge_test error: {test_error}")
+print(f"ridge_training error: \n MSE:{mse_training}\n RMSE:{rmse_training} ")
+print(f"\nridge_test error: \n MSE:{mse_test}\n RMSE:{rmse_test} ")
