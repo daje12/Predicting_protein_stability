@@ -57,6 +57,63 @@ ssym_freq = ssym_matrix/len(ssym_df)
 # print(f'Megascale normalised:\n {megascale_freq} \n')
 # print(f'Ssym normalised:\n {ssym_freq} \n')
 
+#plot heatmaps to visualise bias (not normalized)
+fig, axes = plt.subplots(figsize=(18,7))
+sns.heatmap(
+    megascale_matrix,
+    cmap="Blues",
+    cbar=True,
+    ax=axes,
+    xticklabels=True,
+    yticklabels=True,
+)
+axes.set_title("Megascale Mutational Space Coverage")
+axes.set_xlabel("Mutant Residue")
+axes.set_ylabel("Wild-Type Residue")
+plt.show()
+
+fig1, axes1 = plt.subplots(figsize=(18,7))
+sns.heatmap(
+    ssym_matrix,
+    cmap="Blues",
+    cbar=True,
+    ax=axes1,
+    xticklabels=True,
+    yticklabels=True,
+)
+axes1.set_title("Ssym Mutational Space Coverage")
+axes1.set_xlabel("Mutant Residue")
+axes1.set_ylabel("Wild-Type Residue")
+plt.show()
+
+fig2, axes2 = plt.subplots(figsize=(18,7))
+sns.heatmap(
+    s2648_matrix,
+    cmap="Blues",
+    cbar=True,
+    ax=axes2,
+    xticklabels=True,
+    yticklabels=True,
+)
+axes2.set_title("S2648 Mutational Space Coverage")
+axes2.set_xlabel("Mutant Residue")
+axes2.set_ylabel("Wild-Type Residue")
+plt.show()
+
+fig3, axes3 = plt.subplots(figsize=(18,7))
+sns.heatmap(
+    s669_matrix,
+    cmap="Blues",
+    cbar=True,
+    ax=axes3,
+    xticklabels=True,
+    yticklabels=True,
+)
+axes3.set_title("S669 Mutational Space Coverage")
+axes3.set_xlabel("Mutant Residue")
+axes3.set_ylabel("Wild-Type Residue")
+plt.show()
+
 #plot heatmaps to visualise bias
 fig, axes = plt.subplots(2, 2, figsize=(18,7))
 vmin = min(megascale_freq.min().min(), s2648_freq.min().min(), s669_freq.min().min(), ssym_freq.min().min())
